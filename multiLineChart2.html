@@ -46,19 +46,19 @@ dataset.then(function(data) {
           })
       };
   });
-console.log(typeof(measurement));
-console.log("Column headers", data.columns);
-console.log("Column headers without date", data.columns.slice(1));
-// returns the sliced dataset
-console.log("Slices",slices);
-// returns the first slice
-console.log("First slice",slices[0]);
-// returns the array in the first slice
-console.log("A array",slices[0].values);
-// returns the date of the first row in the first slice
-console.log("Date element",slices[0].values[0].date);
-// returns the array's length
-console.log("Array length",(slices[0].values).length);
+// console.log(typeof(measurement));
+// console.log("Column headers", data.columns);
+// console.log("Column headers without date", data.columns.slice(1));
+// // returns the sliced dataset
+// console.log("Slices",slices);
+// // returns the first slice
+// console.log("First slice",slices[0]);
+// // returns the array in the first slice
+// console.log("A array",slices[0].values);
+// // returns the date of the first row in the first slice
+// console.log("Date element",slices[0].values[0].date);
+// // returns the array's length
+// console.log("Array length",(slices[0].values).length);
 //----------------------------SCALES-----------------------------//
 
 const xScale = d3.scaleTime().range([0,width]);
@@ -156,6 +156,10 @@ const lines = svg.selectAll("lines")
 			<li>Sum of Passenger Count ranges from 3,481,405 to 5,692,572 on this sheet..</li>
 		</ul>
 </li>
+  <li>
+        <h5>Analysis</h5>
+        <p>The trend of sum of passenger count in 2016,2017,2018 are the same, June( summer break) will reach the peak. </p>
+  </li>
 		<li>
 				<h5>Data Source</h5>
 				<p>Air_Traffic_Passenger_Statistics, the link  is <a href="https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg">https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg</a></p>
