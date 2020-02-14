@@ -1,0 +1,19 @@
+.hero-body{
+  background-image: url(europe-air-traffic.jpg);
+}
+h1,h2{
+  font-family: 'Playfair Display', serif;
+  font-family: 'Sriracha', cursive;
+}
+.chart{
+  font-family: 'Playfair Display', serif;
+  font-family: 'Sriracha', cursive;
+
+}
+p{
+  font-family: 'Raleway', sans-serif;
+}
+.section,#nav{
+  max-width: 70%;
+  margin: auto
+}

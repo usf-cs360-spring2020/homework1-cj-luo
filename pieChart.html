@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="//d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+      <script type="text/javascript">
+
+        let margin = {top: 20, right: 20, bottom: 70, left: 100},
+            width = 600 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+
+        let radius = Math.min(width,height)/2;
+
+        let svg = d3.select("body").append("svg")
+                  .attr("width",width+margin.left + margin.right)
+                  .attr("height", height+margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform",  "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+        let data = d3.csv("PieChart.csv", function(data){
+           console.log(data);
+
+
+
+           let color = d3.scaleOrdinal(d3.schemeCategory10)
+                       .domain(data.map(function(d){return d.count}));
+                       console.log(color.domain);
+
+        })
+
+
+
+
+      </script>
+
+  </body>
+</html>

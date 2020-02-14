@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+	<style>
+
+	.axis {
+	  font: 10px sans-serif;
+	}
+
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+	body{
+		max-width: 70%;
+	  margin: auto
+	}
+
+	</style>
+</head>
+
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Galada&display=swap" rel="stylesheet">
+<h1 style="font-family: 'Galada', cursive;">The pessenger count based on GEO Region</h1>
+<script>
+
+let margin = {top: 20, right: 20, bottom: 70, left: 100},
+    width = 600 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// Parse the region / time
+//let	parseregion = d3.time.format("%Y-%m").parse;
+
+let x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
+let y = d3.scale.linear().range([height, 0]);
+
+let xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+    //tickFormat(d3.time.format("%Y-%m"));
+
+let yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10)
+    .tickFormat(function(d){return d+"M";})
+
+let svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+let data = d3.csv("barChart2.csv", function(error, data) {
+
+    data.forEach(function(d) {
+        d.region = d.region;
+        // console.log(typeof(d.value));
+        // console.log(d.value);
+        d.value = parseFloat(d.value)/1000000;
+        // d.value = Number("1000000")/100000;
+        // console.log(typeof(d.value));
+        // console.log(d.value);
+    });
+
+  x.domain(data.map(function(d) { return d.region; }));
+  y.domain([0, 45]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", "-.55em")
+      .attr("transform", "rotate(-90)" );
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "translate("+ (-175/2) +","+(height/2)+")rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "2em")
+      .style("text-anchor", "middle")
+      .text("pessenger count(M)");
+
+  svg.selectAll("bar")
+      .data(data)
+    .enter().append("rect")
+      .style("fill", "steelblue")
+      .attr("x", function(d) { return x(d.region); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); });
+
+});
+
+</script>
+
+<h4>Description of Sum of Passenger Count for each GEO Region.</h4>
+	<ul>
+		<li>
+			<h5>Data</h5>
+			<p>The data is filtered on Activity Period, which ranges from 1/1/2018 to 12/31/2018. The view is filtered on GEO Region, which keeps 9 of 9 members.</p>
+	</li>
+	<li>
+		<h5>Dimensions</h5>
+		<ul>
+			<li>Activity Period ranges from 1/1/2018 to 12/31/2018 on this sheet.</li>
+			<li>GEO Region has 8 members: Australia / Oceania; Canada; Central America; Middle East; US;</li>
+			<li>Sum of Passenger Count ranges from 377,726 to 43,489,998 on this sheet.</li>
+		</ul>
+</li>
+		<li>
+				<h5>Data Source</h5>
+				<p>Air_Traffic_Passenger_Statistics, the link  is <a href="https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg">https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg</a></p>
+		</li>
+	</ul>
+
+
+
+</body>

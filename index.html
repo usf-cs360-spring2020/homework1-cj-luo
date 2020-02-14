@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- TODO: Change title -->
-    <title>Website Template</title>
+    <title>Homework1 for dat visualization</title>
 
     <!-- Load Bulma from CDN (consider saving it to repository instead) -->
     <!-- https://bulma.io/ -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Sriracha&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 
     <!-- Load Font Awesome 5 (free) icons -->
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="styleForIndex.css">
   </head>
 
   <body>
@@ -23,9 +27,9 @@
     <div class="hero-body">
       <div class="container">
         <!-- TODO: Change title -->
-        <h1 class="title">Website Title</h1>
+        <h1 class="title">Air Traffic</h1>
         <!-- TODO: Change subtitle -->
-        <h2 class="subtitle">Website Subtitle</h2>
+        <h2 class="subtitle">Passenger statistics</h2>
       </div>
     </div>
   </section>
@@ -33,8 +37,8 @@
 
   <!-- Page navigation -->
   <!-- https://bulma.io/documentation/components/navbar/ -->
-  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
-    <div class="container">
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation" >
+    <div class="container" id="nav">
       <div class="navbar-brand">
         <!-- TODO: Change link to repository homepage if needed -->
         <!-- TODO: Change which navbar-item is-active if needed -->
@@ -66,13 +70,15 @@
 
             <div class="navbar-dropdown">
               <a class="navbar-item">
-                <span class="icon"><i class="fas fa-chart-line"></i></span>
+                <!-- <span class="icon"><i class="fas fa-chart-line"></i></span> -->
+                <span class="icon"><i class="fas fa-chart-bar"></i></span>
                 <span>Line Chart</span>
-              </a>
+
+              <!-- </a>
               <a class="navbar-item">
                 <span class="icon"><i class="fas fa-chart-area"></i></span>
-                <span>Area Chart</span>
-              </a>
+                <span><a href="barChart.html">Bar Chart</a></span>
+              </a> -->
 
               <hr class="navbar-divider">
 
@@ -112,43 +118,45 @@
       <div class="content">
         <h1 class="title">
           <!-- TODO: Change page title -->
-          Page Title
+          Air Traffic Passenger statistics
         </h1>
-        <p class="subtitle">
-          <!-- TODO: Change page subtitle -->
-          Page Subtitle
+        <!-- <p class="subtitle">
+
+          Transportation
+        </p> -->
+
+        <p>San Francisco International Airport Report on Monthly Passenger Traffic Statistics by Airline. Airport data is seasonal in nature, therefore any comparative analyses should be done on a period-over-period basis (i.e. January 2010 vs. January 2009) as opposed to period-to-period (i.e. January 2010 vs. February 2010).
         </p>
+        <p>It is also important to note that fact and attribute field relationships are not always 1-to-1. For example, Passenger Counts belonging to United Airlines will appear in multiple attribute fields and are additive, which provides flexibility for the user to derive categorical Passenger Counts as desired</p>
 
-        <p>This would be an excellent place to describe what this page is for, what to find in different sections, describe any motivation or theme behind your visualizations, and so on.</p>
-
-        <p>You should not use this template unless you intend to customize it. Make it your own. Keep in mind this simple template is over 300 lines! You can see other examples of websites using Bulma at their showcase: <a href="https://bulma.io/expo/">bulma.io/expo/</a>.</p>
-
+        <!-- <p>You should not use this template unless you intend to customize it. Make it your own. Keep in mind this simple template is over 300 lines! You can see other examples of websites using Bulma at their showcase: <a href="https://bulma.io/expo/">bulma.io/expo/</a>.</p> -->
+        <hr>
         <h2 id="data">Data</h2>
 
-        <p>Include some detailed information about the dataset here. You should <a href="#">add a link</a> to the original dataset. You might also want to quote the license:</p>
+        <p>Dataset has 21.2k and 12 colomns. Here is <a href="https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg" class = "chart">(the link)</a> to the original dataset.</p>
 
-        <blockquote>
+        <!-- <blockquote>
           <p>
             "This data is made available under the Public Domain Dedication and License v1.0 whose full text can be found at: <a href="http://www.opendatacommons.org/licenses/pddl/1.0/">www.opendatacommons.org/licenses/pddl/1.0/</a>"
           </p>
           <cite>Put a citation here, possibly link to the dataset license information directly.</cite>
-        </blockquote>
+        </blockquote> -->
 
         <p>In addition to including a link to the source and license, you should describe the data. You might want a list of some sort to enumerate the different types of columns:</p>
 
         <ol>
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Activity Period:</strong> the specific date of record. The range from 2005 to 2019</li>
 
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>GEO Region summary:</strong>catogory into different region, including US, Asia,Europe,Canada,Mexio,Australia/Oceania</li>
 
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Published Airline:</strong> Give a description of Airline</li>
 
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Passenger Count:</strong> Give a number of Passenger.</li>
         </ol>
 
-        <p>This will of course differ depending on the assignment and data.</p>
+        <!-- <p>This will of course differ depending on the assignment and data.</p> -->
 
-        <h3 id="wrangling">Wrangling</h3>
+        <!-- <h3 id="wrangling">Wrangling</h3>
 
         <p>Perhaps you had to do some data wrangling to the original dataset to prepare it for visualization. This would be a great place to discuss some of that wrangling.
 
@@ -160,46 +168,59 @@ You can even put code into these pre blocks.
 
         <p>You can alternatively embed a Gist if you want. There is an "embed" button on <a href="https://gist.github.com/octocat/6cad326836d38bd3a7ae">the Gist page</a> and results in something like this:</p>
 
-        <script src="https://gist.github.com/octocat/6cad326836d38bd3a7ae.js"></script>
+        <script src="https://gist.github.com/octocat/6cad326836d38bd3a7ae.js"></script> -->
 
+        <hr>
         <h2 id="visualizations">Visualizations</h2>
 
-        <p>Ideally not everything would be on a single page like this example. Instead, you might want to put each section in its own webpage. You would need to carefully replicate the page template (with the header, navbar, and footer) and make the necessary updates. For example, you want the "About" navbar item to be considered active on an "About" web page.</p>
+        <p><a href="multiLineChart2.html" class ="chart"><strong>LineChart</strong></a>: The trend of sum of Passenger Count for Activity Period Month.  Color shows details about Activity Period Year.
+          The marks are labeled by Activity Period Year. The view is filtered on Activity Period Year, which keeps 2016, 2017 and 2018.</p>
 
-        <p>For now this is just a demo. The buttons below do not go anywhere, but can be easily changed to link to different visualization pages.</p>
+        <p><a href="barChart2.html" class ="chart"><strong>BarChart</strong></a>: Sum of Passenger Count for each GEO Region. The data is filtered on Activity Period Year, which keeps 2018.
+        </p>
+
+        <p>BubbleChart: Color shows details about GEO Summary.  Size shows sum of Passenger Count.
+          The marks are labeled by Published Airline and sum of Passenger Count. The data is filtered on GEO Region, which keeps Asia and US.</p>
+
+        <p><a href="PieChart.html" class ="chart"><strong>PieChart</strong></a>: Color shows details about Operating Airline.  Size shows sum of Passenger Count.
+          The marks are labeled by Operating Airline and % of Total Passenger Count. The data is filtered on GEO Region, which keeps US.
+        </p>
+
+        <p><strong>Click</strong> the buttons below  easily changed to link to different visualization images made from Tableau.</p>
 
         <p class="buttons">
-          <a class="button is-large is-success" href="#">
+          <button class="button is-medium is-success" onclick="document.getElementById('image').src='theTrendIn16-18.png'">
             <span class="icon is-medium">
               <i class="fas fa-chart-line"></i>
             </span>
             <span>Line Chart</span>
-          </a>
+          </button>
 
-          <a class="button is-large is-primary" href="#">
-            <span class="icon is-medium">
-              <i class="fas fa-chart-area"></i>
-            </span>
-            <span>Area Chart</span>
-          </a>
-
-          <a class="button is-large is-info" href="#">
+            <button class="button is-medium is-info" onclick="document.getElementById('image').src='barChart.png'">
             <span class="icon is-medium">
               <i class="fas fa-chart-bar"></i>
             </span>
             <span>Bar Chart</span>
-          </a>
+          </button>
 
-          <a class="button is-large is-link" href="#">
+            <button class="button is-medium is-link" onclick="document.getElementById('image').src='peichart.png'">
             <span class="icon is-medium">
               <i class="fas fa-chart-pie"></i>
             </span>
             <span>Pie Chart</span>
-          </a>
-        </p>
+            </button>
 
+            <button class="button is-medium is-primary" onclick="document.getElementById('image').src='publishedAirline.png'">
+              <span class="icon is-medium">
+                <i class="fas fa-chart-area"></i>
+              </span>
+              <span>Bubble Chart</span>
+            </button>
+        </p>
+        <hr>
+        <img  id= "image" src="theTrendIn16-18.png" alt="barChart" style="width:70%;max-width:700px;">
         <!-- https://github.com/vega/vega-embed#basic-example -->
-        <p>It is possible to embed some visualizations directly here too. Here is <a href="https://github.com/vega/vega-embed#basic-example">an example</a> using Vega-Lite:</p>
+        <!-- <p>It is possible to embed some visualizations directly here too. Here is <a href="https://github.com/vega/vega-embed#basic-example">an example</a> using Vega-Lite:</p>
 
         <script src="https://cdn.jsdelivr.net/npm/vega@5.9.0"></script>
         <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.2"></script>
@@ -212,9 +233,9 @@ You can even put code into these pre blocks.
         vegaEmbed('#vis', spec).then(function(result) {
           // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
         }).catch(console.error);
-        </script>
-
-        <h4>Instructions</h4>
+        </script> -->
+        <hr>
+        <!-- <h4>Instructions</h4>
 
         <p>You will likely need to include instructions on how to interpet and use the visualization. In the case above, if you click the three dots <i class="fas fa-ellipsis-h has-text-grey-light	"></i> above it will open a menu where you can either save the visualization to a SVG or PNG, or alternatively open it up in the online Vega Editor.</p>
 
@@ -231,56 +252,9 @@ You can even put code into these pre blocks.
 
         <p class="is-6">
           <em>Thanks to Person Name for their suggestion to do something with the visualization.</em>
-        </p>
+        </p> -->
 
-        <h2 id="grade">Grade</h2>
 
-        <!-- TODO: Remove custom style if no longer needed -->
-        <style>
-          table.grades tbody tr td:nth-child(1),
-          table.grades tbody tr td:nth-child(2) {
-            text-align: center;
-          }
-        </style>
-
-        <!-- TODO: Change or remove table -->
-        <!-- https://bulma.io/documentation/elements/table/ -->
-        <table class="table is-hoverable is-bordered grades">
-          <thead>
-            <tr>
-              <th>Letter</th>
-              <th>Done?</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>D</td>
-              <td><i class="has-text-success fas fa-check-circle"></i></td>
-              <td>Discussion of how this grade level was satisfied. Exactly how this section should look will depend on the assignment in question. There is no requirement for formatting in this way. This is just an example of what a table element might look like for this informaiton.</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td><i class="has-text-success fas fa-check-circle"></i></td>
-              <td>Discussion of how this grade level was satisfied.</td>
-            </tr>
-
-            <tr>
-              <td>B</td>
-              <td><i class="has-text-warning far fa-check-circle"></i></td>
-              <td>Discussion of how this grade level was satisfied.</td>
-            </tr>
-
-            <tr>
-              <td>A</td>
-              <td><i class="has-text-danger fas fa-times-circle"></i></td>
-              <td>Discussion of how this grade level was not satisfied.</td>
-            </tr>
-          </tbody>
-
-        </table>
 
         <h2 id="about">About</h2>
 
@@ -289,22 +263,22 @@ You can even put code into these pre blocks.
         <article class="media">
           <!-- TODO: Replace with profile photo -->
           <figure class="media-left">
-            <p class="image is-128x128"><img class="is-rounded" src="profile.png"></p>
+            <p class="image is-128x128"><img class="is-rounded" src="icon.jpg"></p>
           </figure>
 
           <div class="media-content">
             <div class="content">
               <!-- TODO: Replace with contact information -->
               <p>
-                <strong>Full Name</strong><br/>
-                CS Major, <a href="https://www.usfca.edu/">University of San Francisco</a><br/>
-                <em>Expected Graduation: 20??</em><br/>
-                <i class="fas fa-envelope"></i> <a href="mailto:username@dons.usfca.edu">username@dons.usfca.edu</a>
+                <strong>Kate Luo</strong><br/>
+                MS in CS, <a href="https://www.usfca.edu/">University of San Francisco</a><br/>
+                <em>Expected Graduation: 2022</em><br/>
+                <i class="fas fa-envelope"></i> <a href="mailto:username@dons.usfca.edu">cluo8@dons.usfca.edu</a>
               </p>
 
               <!-- TODO: Replace with brief biography -->
               <p>
-                Here is a brief bio about yourself. A good rule of thumb is to include at least one technical tidbit (favorite area or course within computer science), and one fun tidbit (such as loving dogs).
+                I am hiking guy. I love visting a national park and then find the famous trail to hinking. There's fresh air, the smell of trees and an opportunity to be one with nature. Walking through nature and breathing clean air helps us to relax and get away from the stress of the city.
               </p>
 
               <!-- TODO: Replace or remove tags -->

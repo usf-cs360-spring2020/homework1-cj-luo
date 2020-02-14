@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>Multi Line Chart</title>
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Galada&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+        body{
+          max-width: 70%;
+          margin: auto
+        }
+  </style>
+</head>
+<body>
+<h3 style="font-family: 'Galada', cursive;">The trend of sum of Passenger Count for Activity Period Month in 2016, 2017, 2018</h3>
+<div id="container" class="svg-container"></div>
+<script>
+//------------------------1. PREPARATION-------------------------//
+//-----------------------------SVG-------------------------------//
+
+let margin = {top: 20, right: 20, bottom: 70, left: 40},
+    width = 600 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+// we are appending SVG first
+let svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+//-----------------------------DATA------------------------------//
+
+let timeConv = d3.timeParse("%d-%b-%Y");
+let dataset = d3.csv("data.csv");
+dataset.then(function(data) {
+  const slices = data.columns.slice(1).map(function(id) {// slice1 means excepte the first one
+      return {
+          id: id,
+          values: data.map(function(d){
+              return {
+                  date: timeConv(d.date),
+                  measurement: +d[id] // Unary plus is the fastest and preferrry way of converting sth into a number
+              };
+          })
+      };
+  });
+console.log(typeof(measurement));
+console.log("Column headers", data.columns);
+console.log("Column headers without date", data.columns.slice(1));
+// returns the sliced dataset
+console.log("Slices",slices);
+// returns the first slice
+console.log("First slice",slices[0]);
+// returns the array in the first slice
+console.log("A array",slices[0].values);
+// returns the date of the first row in the first slice
+console.log("Date element",slices[0].values[0].date);
+// returns the array's length
+console.log("Array length",(slices[0].values).length);
+//----------------------------SCALES-----------------------------//
+
+const xScale = d3.scaleTime().range([0,width]);
+const yScale = d3.scaleLinear().rangeRound([height, 0]);
+
+xScale.domain(d3.extent(data, function(d){
+    return timeConv(d.date)}));
+
+// yScale.domain([0,5]);
+//
+// let y = d3.max(slices,function(c){
+//   return d3.max(c.values,function(d){
+//     return d.measurement +4;
+//   })
+// })
+yScale.domain([(0), d3.max(slices, function(c) {
+    return d3.max(c.values, function(d) {
+        return d.measurement + 4; });
+        })
+    ]);
+//-----------------------------AXES------------------------------//
+const yaxis = d3.axisLeft()
+    .ticks(6)
+    .tickFormat(function(d){return d/1000000+'M';})
+    .scale(yScale);
+
+const xaxis = d3.axisBottom()
+    .ticks(12)
+    .tickFormat(d3.timeFormat('%b'))
+    .scale(xScale);
+//----------------------------LINES------------------------------//
+const line = d3.line()
+    .x(function(d) { return xScale(d.date); })
+    .y(function(d) { return yScale(d.measurement);});
+
+let id = 0;
+const ids = function () {
+    return "line-"+id++;
+}
+//-------------------------2. DRAWING----------------------------//
+
+//-----------------------------AXES------------------------------//
+svg.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xaxis);
+
+svg.append("g")
+    .attr("class", "axis")
+    .call(yaxis)
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("dy", ".75em")
+    .attr("y", 6)
+    .style("text-anchor", "end")
+    .text("Passenger count");
+//----------------------------LINES------------------------------//
+const lines = svg.selectAll("lines")
+    .data(slices)
+    .enter()
+    .append("g");
+
+    lines.append("path")
+    .attr("class", ids)
+    .attr("d", function(d) { return line(d.values); });
+
+    lines.append("text")
+    .attr("class","serie_label")
+    .datum(function(d) {
+        return {
+            id: d.id,
+            value: d.values[d.values.length - 1]}; })
+    .attr("transform", function(d) {
+            return "translate(" + (xScale(d.value.date) -20)
+            + "," + (yScale(d.value.measurement) +10 ) + ")"; })
+    .attr("x", 5)
+    .text(function(d) { return d.id; });
+
+});
+
+</script>
+
+<hr>
+<h4>Description of The trend of sum of Passenger Count for Activity Period Month.</h4>
+	<ul>
+		<li>
+			<h5>Data</h5>
+			<p>The data is filtered on Activity Period. Color shows details about Activity Period Year.  The marks are labeled by Activity Period Year. The view is filtered on Activity Period Year, which keeps 2016, 2017 and 2018..</p>
+	</li>
+	<li>
+		<h5>Dimensions</h5>
+		<ul>
+			<li>Activity Period ranges from 1/1/2016 to 12/31/2018 on this sheet.</li>
+			<li>Activity Period Month has 12 members:December; February; June; November; September;...</li>
+			<li>Sum of Passenger Count ranges from 3,481,405 to 5,692,572 on this sheet..</li>
+		</ul>
+</li>
+		<li>
+				<h5>Data Source</h5>
+				<p>Air_Traffic_Passenger_Statistics, the link  is <a href="https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg">https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg</a></p>
+		</li>
+	</ul>
+</body>
