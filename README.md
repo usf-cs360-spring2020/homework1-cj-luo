@@ -2,7 +2,7 @@
 
 <https://usf-cs360-spring2020.github.io/template-bulma/>
 
-![profile image](icon.jpg)
+
 
 **Name:** Kate Luo  
 **Email:** <cluo8@dons.usfca.edu>
